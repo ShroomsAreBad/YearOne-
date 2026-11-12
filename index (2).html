@@ -1,0 +1,215 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Year One</title><meta name="theme-color" content="#171717"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&display=swap">
+<style>
+:root{--bg:#f1f1f0;--s:#fff;--ln:#e4e4e3;--ink:#171717;--mu:#8b8b8b;--so:#ececeb;--oi:#fff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e0e;--s:#171717;--ln:#262626;--ink:#ececec;--mu:#7b7b7b;--so:#212121;--oi:#111;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e0e0e;--s:#171717;--ln:#262626;--ink:#ececec;--mu:#7b7b7b;--so:#212121;--oi:#111;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.5 'Hanken Grotesk',system-ui,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+.app{display:grid;grid-template-columns:210px 1fr;min-height:100vh}
+nav{padding:28px 18px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+.lg{font-weight:300;font-size:24px;letter-spacing:-.03em;margin:0 12px 22px}
+.nv{background:none;border:0;text-align:left;padding:9px 12px;border-radius:10px;color:var(--mu);cursor:pointer}
+.nv.on{background:var(--s);color:var(--ink);font-weight:600}
+main{padding:34px clamp(16px,4vw,48px) 60px;max-width:1080px;width:100%}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:26px}
+h1{font-weight:300;font-size:clamp(28px,4vw,40px);letter-spacing:-.03em;line-height:1.1}
+h3{font-size:15px;font-weight:600;margin-bottom:10px}h3 .mu{font-weight:400}
+.ib{width:38px;height:38px;border-radius:50%;border:1px solid var(--ln);background:var(--s);cursor:pointer;font-size:16px}
+.g{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));margin-bottom:16px}
+.c{background:var(--s);border-radius:20px;padding:22px}
+.hero{display:flex;gap:22px;align-items:center}
+.ring{width:132px;flex:none}.ring circle{fill:none;stroke-width:8}.rb{stroke:var(--so)}.rf{stroke:var(--ink);stroke-linecap:round}
+.rn{font-size:34px;font-weight:300;fill:var(--ink);text-anchor:middle}
+.bn{font-weight:300;font-size:34px;letter-spacing:-.03em;line-height:1.1}
+.mu{color:var(--mu);font-size:13px}
+.r{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid var(--ln)}
+.r:first-of-type{border-top:0}.r b{font-weight:500;margin-left:auto;text-align:right}.gr{flex:1}
+.ck{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--mu);background:none;flex:none;cursor:pointer;display:grid;place-items:center}
+.ck.on{background:var(--ink);border-color:var(--ink)}
+.ck.on::after{content:'';width:8px;height:5px;border:solid var(--oi);border-width:0 0 2px 2px;transform:rotate(-45deg) translate(1px,-1px)}
+.dn{color:var(--mu);text-decoration:line-through}
+.x{background:none;border:0;color:var(--mu);cursor:pointer;font-size:18px;line-height:1;opacity:.5}
+.bar{height:6px;border-radius:3px;background:var(--so);overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--ink);border-radius:3px}
+.pls{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.pl{padding:7px 13px;border-radius:99px;border:1px solid var(--ln);background:none;cursor:pointer;color:var(--mu)}
+.pl.on{background:var(--ink);color:var(--oi);border-color:var(--ink)}
+.in{background:var(--so);border:0;border-radius:10px;padding:9px 12px;min-width:0}
+textarea.in{width:100%;resize:vertical;min-height:62px;margin-top:6px}
+.btn{background:var(--ink);color:var(--oi);border:0;border-radius:10px;padding:9px 16px;cursor:pointer;font-weight:500}
+.add{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.add .in{flex:1;min-width:90px}
+.t{display:flex;gap:14px;padding:6px 0 6px 10px;color:var(--mu)}.t b{font-weight:500;width:46px;flex:none;font-variant-numeric:tabular-nums}
+.t.now{color:var(--ink);font-weight:600;box-shadow:inset 2px 0 var(--ink)}
+.hm{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:1fr;gap:4px}
+.hm i{aspect-ratio:1;border-radius:4px;background:var(--ink)}
+.sp{width:100%;height:60px}.sp polyline{stroke:var(--ink);stroke-width:2;fill:none;vector-effect:non-scaling-stroke}
+.ol{padding-left:20px}.ol li{padding:4px 0}
+.mo{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin:10px 0}.mo i{height:8px;border-radius:4px;background:var(--so)}.mo i.on{background:var(--ink)}
+input[type=range]{accent-color:var(--ink);width:100%}
+.big{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:16px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@media(max-width:820px){.app{grid-template-columns:1fr}nav{position:fixed;bottom:0;left:0;right:0;top:auto;height:auto;flex-direction:row;background:var(--s);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:5;border-top:1px solid var(--ln);justify-content:space-around;gap:0}.nv{padding:9px 4px;font-size:12px;text-align:center;flex:1}.lg{display:none}main{padding-bottom:110px}.hero{flex-direction:column;align-items:flex-start}}
+.t b{width:78px}.tp{display:flex;gap:4px}.tp .in{flex:none;min-width:0;padding:9px 6px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.cd{background:var(--so);border:0;border-radius:10px;min-height:64px;padding:6px;text-align:left;cursor:pointer;font-size:13px}.cd.today{outline:2px solid var(--ink)}.cd i{display:block;height:4px;border-radius:2px;background:var(--ink);margin-top:8px}
+.pl .x{margin-left:4px}.mm{max-width:240px}.hm i[style="opacity:0"]{background:none}
+@media(max-width:820px){.nv{font-size:11px;padding:9px 2px}.ck{width:26px;height:26px}.x{padding:6px 8px}}button{touch-action:manipulation}.sx{flex-wrap:wrap}
+</style></head><body>
+<div class="app"><nav id="n"></nav><main id="m"></main></div>
+<script>
+const D=n=>{const d=new Date();d.setDate(d.getDate()-n);return d.toLocaleDateString('en-CA')},T=()=>D(0),$=s=>document.querySelector(s),
+esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),
+php=n=>'₱'+Math.round(n).toLocaleString('en-US'),sm=(a,f)=>a.reduce((t,x)=>t+(f(x)?x.a:0),0),K='yearone-v1';
+const AR0={body:'Body',looks:'Looks',mind:'Mind',money:'Money',career:'Career'};let AR;
+const HB0=[['sl','In bed by 7:30 PM','body'],['wa','2.5 L of water','body'],['wk','Workout or 30-min walk','body'],['pr','Protein at every meal','body'],['am','AM skincare + SPF','looks'],['pm','PM skincare','looks'],['jn','5-minute journal','mind'],['ph','No scrolling in bed','mind'],['lg','Log your spending','money'],['bd','45 min build or create','money'],['st','60 min skill study','career'],['kb','Write up 1 solved ticket','career']];
+const SCH=[['02:45','Wake, water, face wash'],['03:15','Stretch, pack lunch'],['04:00','Shift starts'],['07:00','Break 1: walk 15 min'],['08:30','Lunch: protein, no phone'],['10:30','Break 2: stretch, water'],['13:00','Shift ends'],['13:30','Workout or walk'],['14:30','Shower, light skincare'],['15:00','Study block (60 min)'],['16:15','Build / create block (45 min)'],['17:15','Dinner, family, chores'],['19:00','Wind down, journal, PM skincare'],['19:30','Lights out']];
+const MF={1:'SQL practice',2:'Python and pandas',3:'Film and edit 3 shorts',4:'Portfolio project',5:'Analytics dashboard',6:'Gaming content or stream',0:'Budget review + plan week'};
+const INC0=['Salary','Programming','Data analytics','Social media','Gaming','Other income'],EXP0=['Food','Transport','Bills','Needs','Wants','Debt','Savings'];
+const ST=[['Programming',20000,['Python + Git basics, 30 min a day','Ship 3 small projects to GitHub','Pitch automation gigs (Upwork, OnlineJobs)','Raise rates, keep repeat clients']],['Data analytics',25000,['SQL + Excel fundamentals','Build a Power BI dashboard from public data','Publish portfolio, apply internally or freelance','Take analyst projects or move roles']],['Social media',8000,['Pick one niche, post 3× a week','Post 5× a week, read your analytics','Affiliate links + UGC pitches','Brand deals, a digital product']],['Gaming',6000,['Clip best plays, 3 shorts a week','One game, one weekly stream','Join sponsor + tournament boards','Coaching, subs, sponsorships']]];
+const SK=[['SQL','Joins, window functions, one real report'],['Python','pandas + a script that automates a ticket task'],['Power BI or Tableau','One public dashboard'],['JavaScript + Git','Portfolio site live'],['Cloud cert','AZ-900 or AWS Cloud Practitioner'],['Content craft','Hooks, editing, steady cadence']];
+const WORK=['Turn 10 solved tickets into KB articles','Query logs with SQL','Automate one repeated task with Python','Mentor a Tier 1 teammate','Ask your lead about Tier 3, SRE or solutions paths','Add measurable wins to your resume'];
+const LK={am:['Gentle cleanser','Moisturizer','Sunscreen SPF 50, reapply at break'],pm:['Cleanser','Niacinamide, or a retinoid 2–3 nights a week once skin is ready (never on exfoliation nights)','Moisturizer'],wk:['Exfoliate Wed + Sun nights (BHA or AHA, skip retinoid that night)','Fresh pillowcase on Sunday','Tidy brows, nails, neckline on Saturday','Sunday progress photos']};
+const MC=['Haircut that suits your face','Dentist cleaning + whitening talk','Three outfits that fit well','A signature fragrance','Eyebrow clean-up','Posture check photo'];
+const LV=['Sleep and water','Body fat near 12–15% with some muscle','Sunscreen and a steady routine','Haircut, brows, facial hair','Clothes that fit','Posture','Teeth and smile','Fragrance'];
+const RM=[['Foundation','Sleep, steps, skincare, log every peso'],['Build','Lifting habit, emergency fund, SQL and Python'],['Expand','Portfolio, first paid gig, steady content'],['Refine','Review, double down on what works, plan year two']];
+const TIP={body:'Lay out gym clothes the night before. The 1:30 PM session is easiest when it’s already decided.',looks:'Keep SPF and cleanser by the sink. Consistency beats expensive products.',mind:'Phone charges outside your bed. Your 4 AM start depends on a calm evening.',money:'Log spending in your 3 PM block, once a day. A minute, not an hour.',career:'Do one thing before your first break: save a ticket fix as a KB note. Small wins stack up on your resume.'};
+let S={},V='t',wdv=null;try{S=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+const HT={sl:'19:30',am:'03:00',pm:'19:00',jn:'19:00',wk:'13:30',lg:'15:00',st:'15:00',bd:'16:15',kb:'06:45'},ini=()=>{S.start??=T();S.hb??=HB0.map(([id,n,a])=>({id,n,a,t:HT[id]||''}));S.log??={};S.w??=[];S.tx??=[];S.sk??={};S.c??={};S.rv??={};S.fund??=60000;S.td??=[];S.gl??=[];S.pu??=9;S.pl??=[{d:T(),n:S.pu}];S.sch??=SCH.map(x=>[...x]);S.inc??=INC0.slice();S.exp??=EXP0.slice();S.ar??={...AR0};S.dl??={};S.ht??=0;AR=S.ar};ini();
+if(S.th)document.documentElement.dataset.theme=S.th;
+let boot=1;const sv=()=>{if(!boot)S._u=Date.now();try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}window.cp&&cp()},lg=d=>S.log[d]||(S.log[d]={h:[],m:0});
+const sc=d=>{const h=S.log[d]?.h||[];return S.hb.length?S.hb.filter(x=>h.includes(x.id)).length/S.hb.length:0};
+const ar=a=>{const hs=S.hb.filter(x=>x.a==a);if(!hs.length)return null;let n=0;for(let i=0;i<7;i++){const h=S.log[D(i)]?.h||[];n+=hs.filter(x=>h.includes(x.id)).length}return n/(hs.length*7)};
+const streak=()=>{let n=0;for(let i=sc(T())>=.6?0:1;i<400&&sc(D(i))>=.6;i++)n++;return n};
+const mon=()=>Math.max(0,Math.min(11,Math.floor((Date.now()-new Date(S.start+'T00:00'))/2.6298e9)));
+const hd=(a,b)=>`<header class="hd"><div><p class="mu">${a}</p><h1>${b}</h1></div><span style="display:flex;gap:8px"><button class="ib" data-a="cloud" title="Sync across devices" style="${window.CS?'background:var(--ink);color:var(--oi)':''}">☁</button><button class="ib" data-a="th" title="Switch light or dark">◐</button></span></header>`;
+const ring=p=>`<svg viewBox="0 0 120 120" class="ring"><circle class="rb" cx="60" cy="60" r="52"/><circle class="rf" cx="60" cy="60" r="52" stroke-dasharray="${(327*p).toFixed(1)} 327" transform="rotate(-90 60 60)"/><text class="rn" x="60" y="71">${Math.round(p*100)}</text></svg>`;
+const cl=(pre,arr)=>arr.map((t,i)=>{const o=S.c[pre+i];return`<div class="r"><button class="ck ${o?'on':''}" data-a="chk" data-v="${pre+i}"></button><span class="gr ${o?'dn':''}">${t}</span></div>`}).join('');
+const bar=p=>`<div class="bar"><i style="width:${Math.min(100,Math.round(p*100))}%"></i></div>`;
+const spark=a=>{if(a.length<2)return'<p class="mu">Log two entries to see your trend.</p>';const mn=Math.min(...a),mx=Math.max(...a),r=mx-mn||1;return`<svg viewBox="0 0 200 50" preserveAspectRatio="none" class="sp"><polyline points="${a.map((v,i)=>`${i*200/(a.length-1)},${45-(v-mn)/r*40}`).join(' ')}"/></svg>`};
+const weak=()=>{let k='body',m=2;for(const a in AR){const v=ar(a);if(v!=null&&v<m){m=v;k=a}}return k};
+
+function vT(){const n=new Date(),d=T(),L=S.log[d]||{h:[],m:0},mi=n.getHours()*60+n.getMinutes(),k=weak(),hs=[...S.hb].sort((a,b)=>(a.t||'99').localeCompare(b.t||'99')),tdl=tds(d),
+tl=[...S.sch.map((q,i)=>({t:q[0],n:tn(q[1],n.getDay()),i})),...S.hb.filter(q=>q.t).map(q=>({t:q.t,n:q.n}))].sort((a,b)=>a.t.localeCompare(b.t));let cur=tl.length-1;tl.forEach((q,i)=>{const[a,b]=q.t.split(':');if(a*60+ +b<=mi)cur=i});
+const done=S.hb.filter(x=>L.h.includes(x.id)).length,hr=n.getHours();
+return hd(n.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}),hr<12?'Good morning':hr<18?'Good afternoon':'Good evening')+
+`<div class="g"><div class="c hero">${ring(sc(d))}<div><div class="bn">${streak()} <span class="mu">day streak</span></div><p class="mu">A day counts at 60% or more. Small and daily wins.</p></div></div>
+<div class="c"><h3>Today’s plan</h3>${spc(d)}<div class="r"><span class="mu">Money block</span><b>${MF[n.getDay()]}</b></div><div class="r"><span class="mu">Needs attention</span><b>${AR[k]||'–'}</b></div><p class="mu" style="margin-top:8px">${TIP[k]||''}</p></div></div>
+<div class="g"><div class="c"><h3>Daily habits <span class="mu">${done} of ${S.hb.length}</span></h3>${hs.map(h=>hrow(h,d,L)).join('')}<div class="add"><input class="in" id="nh" placeholder="Add a habit">${arSel('na')}${tp('nt')}<button class="btn" data-a="addh">Add</button></div></div>
+<div><div class="c" style="margin-bottom:16px"><h3>How are you feeling?</h3><div class="pls" style="margin:0">${['Low','Meh','Okay','Good','Great'].map((t,i)=>`<button class="pl ${L.m==i+1?'on':''}" data-a="mood" data-v="${i+1}">${t}</button>`).join('')}</div></div>
+<div class="c" style="margin-bottom:16px"><h3>To-do <span class="mu">${tdl.filter(x=>x.x).length} of ${tdl.length}</span></h3>${tdl.map(tdr).join('')||'<p class="mu">Nothing planned yet.</p>'}${tdf(d)}</div>
+<div class="c"><h3>Journal</h3><textarea class="in" data-jn="1" placeholder="One line about today">${esc(L.j||'')}</textarea></div></div></div>
+<div class="g"><div class="c"><h3>Your day, PH time</h3>${tl.map((q,i)=>`<div class="t ${i==cur?'now':''}"><b>${f12(q.t)}</b><span>${esc(q.n)}</span>${q.i!=null?`<button class="x" style="margin-left:auto" data-a="sdel" data-v="${q.i}">×</button>`:''}</div>`).join('')}<div class="add">${tp('st')}<input class="in" id="sn" placeholder="What happens then?"><button class="btn" data-a="sadd">Add</button></div></div>${lst('ar')}</div>`}
+
+function vB(){const t=new Date(),ti=(t.getDay()+6)%7,sel=wdv??t.getDay(),[nm,ex]=WKf()[sel],dt=D(ti-(sel+6)%7),kg=S.w.at(-1)?.w||0,f=S.w[0],bm=S.ht&&kg?(kg/(S.ht/100)**2).toFixed(1):'–',wc=S.w.filter(x=>x.c).at(-1)?.c,wh=S.ht&&wc?(wc/S.ht).toFixed(2):'–';
+return hd('Strength, steps, sleep',`Body`)+
+`<div class="pls">${[1,2,3,4,5,6,0].map(d=>`<button class="pl ${d==sel?'on':''}" data-a="wd" data-v="${d}">${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d]}</button>`).join('')}</div>
+<div class="g"><div class="c"><h3>${nm} <span class="mu">about 45 min</span></h3>${cl('x'+dt+'_',ex.map(e=>`${e[0]} <span class="mu">${e[1]}</span>`))}<p class="mu" style="margin-top:10px">Sets are sized to your push-up max (${S.pu}). Finish every set clean twice, then retest and log a new max.</p></div>
+${pcard()}<div class="c"><h3>Body metrics</h3><div class="big"><div><div class="bn">${kg?kg+' kg':'–'}</div><span class="mu">${f&&kg?(kg-f.w>0?'+':'')+(kg-f.w).toFixed(1)+' kg since start':'Set your baseline'}</span></div><div><div class="bn">${kg?Math.round(kg*1.6)+' g':'–'}</div><span class="mu">daily protein target</span></div><div><div class="bn">${bm}</div><span class="mu">BMI</span></div><div><div class="bn">${wh}</div><span class="mu">waist ÷ height, aim under 0.5</span></div></div>${spark(S.w.map(x=>x.w))}<div class="add"><input class="in" id="ht" type="number" placeholder="Height (cm)" value="${S.ht||''}"><input class="in" id="wk" type="number" step="0.1" placeholder="Weight (kg)"><input class="in" id="wc" type="number" step="0.1" placeholder="Waist (cm), optional"><button class="btn" data-a="addw">Log</button></div><p class="mu" style="margin-top:10px">Enter height once. Weight is the basic number; waist is optional but useful, because waist ÷ height shows fat loss and muscle gain that the scale hides. Log weekly, same time of day.</p></div>
+<div class="c"><h3>Fuel and recovery</h3><ol class="ol"><li>Sleep 7+ hours. Lights out near 7:30 PM.</li><li>Protein at every meal, eggs or chicken at lunch.</li><li>Water through the shift, caffeine before 10 AM.</li><li>Eight thousand steps, mostly from your two breaks.</li><li>Take a baseline checkup and basic bloodwork.</li></ol></div></div>`}
+
+function vL(){const ol=a=>`<ol class="ol">${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+return hd('Skin, grooming, presentation','Looks')+`<div class="g"><div class="c"><h3>Morning</h3>${ol(LK.am)}<h3 style="margin-top:14px">Night</h3>${ol(LK.pm)}</div><div class="c"><h3>Weekly</h3>${ol(LK.wk)}<p class="mu" style="margin-top:10px">Add one new product at a time and wait two weeks before judging it.</p></div></div>
+<div class="g"><div class="c"><h3>This month</h3>${cl('l',MC)}</div><div class="c"><h3>What moves the needle, in order</h3>${ol(LV)}<p class="mu" style="margin-top:10px">Face-shape hacks are mostly noise. Sleep, body fat and skin do the heavy lifting.</p></div></div>`}
+
+function vM(){const mo=T().slice(0,7),tx=S.tx.filter(x=>x.d.startsWith(mo)),inc=sm(tx,x=>S.inc.includes(x.c)),sv_=sm(tx,x=>x.c=='Savings'),sp=sm(tx,x=>!S.inc.includes(x.c)&&x.c!='Savings'),fund=sm(S.tx,x=>x.c=='Savings'),m=mon(),p=Math.floor(m/3),n=new Date().getDay();
+return hd('Four streams, one safety net','Money')+
+`<div class="big"><div><div class="bn">${php(inc)}</div><span class="mu">in this month</span></div><div><div class="bn">${php(sp)}</div><span class="mu">spent</span></div><div><div class="bn">${inc?Math.round(sv_/inc*100):0}%</div><span class="mu">saved</span></div></div>
+<div class="g"><div class="c"><h3>Emergency fund <span class="mu">${php(fund)} of <input class="in" id="fu" type="number" value="${S.fund}" style="width:92px;padding:3px 8px"></span></h3>${bar(fund/(S.fund||1))}<p class="mu">Start with one month of expenses, then work up to three to six. Pay high-interest debt first.</p></div>
+<div class="c"><h3>Weekly rhythm <span class="mu">3:00 to 5:15 PM</span></h3>${[1,2,3,4,5,6,0].map(d=>`<div class="r" ${d==n?'style="font-weight:600"':''}><span class="mu">${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d]}</span><b>${MF[d]}</b></div>`).join('')}</div></div>
+<div class="g">${ST.map(s=>{const e=sm(tx,x=>x.c==s[0]);return`<div class="c"><h3>${s[0]} <span class="mu">${php(e)} of ${php(s[1])}</span></h3>${bar(e/s[1])}<p>${s[2][p]}</p></div>`}).join('')}</div>
+<p class="mu" style="margin-bottom:16px">Treat side income as six-month experiments. Your Tier 2 salary and career growth are the stable base.</p>
+<div class="c"><h3>Log money</h3><div class="add" style="margin:0 0 10px"><select class="in" id="tc"><optgroup label="Income">${S.inc.map(x=>`<option>${x}</option>`).join('')}</optgroup><optgroup label="Out">${S.exp.map(x=>`<option>${x}</option>`).join('')}</optgroup></select><input class="in" id="ta" type="number" placeholder="Amount (₱)"><button class="btn" data-a="addtx">Add</button></div>
+${S.tx.map((x,i)=>[x,i]).slice(-8).reverse().map(([x,i])=>`<div class="r"><span class="gr">${x.c}</span><span class="mu">${x.d.slice(5)}</span><b>${S.inc.includes(x.c)?'+':'−'}${php(x.a)}</b><button class="x" data-a="deltx" data-v="${i}">×</button></div>`).join('')||'<p class="mu">Nothing logged yet. Add your first entry above.</p>'}</div><div class="g" style="margin-top:16px">${lst('inc')}${lst('exp')}</div>`}
+
+function vS(){const avg=SK.reduce((a,_,i)=>a+(S.sk[i]||0),0)/SK.length;
+return hd('Tier 2 and beyond','Skills')+`<div class="g"><div class="c"><h3>Skill levels <span class="mu">${Math.round(avg)}% overall</span></h3>${SK.map((s,i)=>`<div style="padding:9px 0"><div style="display:flex;justify-content:space-between"><b style="font-weight:500">${s[0]}</b><span class="mu">${S.sk[i]||0}%</span></div><input type="range" min="0" max="100" step="5" value="${S.sk[i]||0}" data-sk="${i}"><span class="mu">${s[1]}</span></div>`).join('')}</div>
+<div class="c"><h3>Level up at PDI</h3>${cl('w',WORK)}<p class="mu" style="margin-top:10px">Every item doubles as proof for your next promotion or job application.</p></div></div>`+vG()}
+
+function vP(){const ti=(new Date().getDay()+6)%7,m=mon(),wk=D(ti),r=S.rv[wk]||{},mood=[],cm=[];for(let i=0;i<30;i++){const l=S.log[D(i)];if(l?.m)mood.push(l.m);cm.push(sc(D(i)))}
+const av=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0,f=S.w[0],l=S.w.at(-1),hm=(()=>{let o='';for(let k=77+ti;k>=ti-6;k--)o+=`<i title="${D(k)}" style="opacity:${k<0?.04:(.07+.93*sc(D(k))).toFixed(2)}"></i>`;return`<div class="hm">${o}</div>`})();
+return hd('Week '+(Math.floor((Date.now()-new Date(S.start+'T00:00'))/6048e5)+1)+' of your year','Progress')+
+`<div class="g"><div class="c"><h3>Last 12 weeks</h3>${hm}</div><div class="c"><h3>Area scores, last 7 days</h3>${Object.keys(AR).map(a=>{const v=ar(a);return v==null?'':`<div><div style="display:flex;justify-content:space-between"><span>${AR[a]}</span><span class="mu">${Math.round(v*100)}%</span></div>${bar(v)}</div>`}).join('')}</div></div>
+<div class="c" style="margin-bottom:16px"><h3>Month ${m+1} of 12: ${RM[Math.floor(m/3)][0]}</h3><div class="mo">${Array.from({length:12},(_,i)=>`<i class="${i<=m?'on':''}"></i>`).join('')}</div><p class="mu">${RM[Math.floor(m/3)][1]}</p></div>
+<div class="c" style="margin-bottom:16px"><h3>Scorecard</h3><div class="big"><div><div class="bn">${Math.round(av(cm)*100)}%</div><span class="mu">habits, 30 days</span></div><div><div class="bn">${mood.length?av(mood).toFixed(1):'–'}</div><span class="mu">average mood of 5</span></div><div><div class="bn">${f&&l?(l.w-f.w).toFixed(1):'–'}</div><span class="mu">kg change</span></div><div><div class="bn">${php(sm(S.tx,x=>x.c=='Savings'))}</div><span class="mu">saved</span></div></div></div>
+<div class="g"><div class="c"><h3>Weekly review</h3>${[['w','What went well?'],['m','What got missed?'],['a','One change for next week']].map(([k,p])=>`<textarea class="in" data-rv="${k}" placeholder="${p}">${esc(r[k]||'')}</textarea>`).join('')}</div>
+<div class="c"><h3>Backup</h3><p class="mu">Your data lives in this browser. Export it now and then.</p><textarea class="in" id="bk" placeholder="Paste a backup here to import"></textarea><div class="add"><button class="btn" data-a="dl">Download file</button><button class="btn" data-a="exp">Copy text</button><input type="file" accept=".json" data-imf="1" class="in"><button class="btn" data-a="imp">Import</button></div></div></div>`}
+
+const NAV=[['t','Today',vT],['pl','Plan',vPl],['lg','Log',vLg],['b','Body',vB],['l','Looks',vL],['m','Money',vM],['s','Skills',vS],['p','Progress',vP]];
+function draw(){$('#n').innerHTML='<div class="lg">Year One</div>'+NAV.map(x=>`<button class="nv ${V==x[0]?'on':''}" data-a="nav" data-v="${x[0]}">${x[1]}</button>`).join('');$('#m').innerHTML=NAV.find(x=>x[0]==V)[2]()}
+const A={nav:v=>{V=v;draw();scrollTo(0,0)},th:()=>{const r=document.documentElement,c=r.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');S.th=r.dataset.theme=c=='dark'?'light':'dark';sv()},
+hb:v=>{const[id,dd]=v.split('|'),l=lg(dd||T()),i=l.h.indexOf(id);i<0?l.h.push(id):l.h.splice(i,1);sv();draw()},mood:v=>{lg(T()).m=+v;sv();draw()},chk:k=>{S.c[k]=!S.c[k];sv();draw()},wd:v=>{wdv=+v;draw()},
+addh:()=>{const n=$('#nh').value.trim();if(n){S.hb.push({id:'h'+Date.now(),n,a:$('#na').value});sv();draw()}},delh:id=>{S.hb=S.hb.filter(x=>x.id!=id);sv();draw()},
+addw:()=>{const w=+$('#wk').value,c=+$('#wc').value,h=+$('#ht').value;if(h>0)S.ht=h;if(w)S.w.push({d:T(),w,c});sv();draw()},dl:()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));a.download='year-one-'+T()+'.json';a.click()},addtx:()=>{const a=+$('#ta').value;if(a>0){S.tx.push({d:T(),c:$('#tc').value,a});sv();draw()}},deltx:i=>{S.tx.splice(+i,1);sv();draw()},
+exp:()=>{const b=$('#bk');b.value=JSON.stringify(S);b.select();try{navigator.clipboard.writeText(b.value)}catch(e){}},imp:()=>{try{S=Object.assign(S,JSON.parse($('#bk').value));ini();sv();draw()}catch(e){$('#bk').value='';$('#bk').placeholder='That text isn’t a valid backup. Paste the full export.'}}};
+let pv='d',pd=T(),eh=null;
+const f12=t=>{if(!t)return'';const[h,m]=t.split(':').map(Number);return((h+11)%12+1)+':'+String(m).padStart(2,'0')+' '+(h<12?'AM':'PM')},
+tp=(id,v='')=>{const[h,m]=v?v.split(':').map(Number):[-1,0],hh=h<0?'':(h+11)%12+1,R=[...Array(12).keys()];return`<span class="tp"><select class="in" id="${id}h"><option value="">--</option>${R.map(i=>`<option ${hh==i+1?'selected':''}>${i+1}</option>`).join('')}</select><select class="in" id="${id}m">${R.map(i=>`<option value="${i*5}" ${m==i*5?'selected':''}>${String(i*5).padStart(2,'0')}</option>`).join('')}</select><select class="in" id="${id}p"><option ${h<12?'selected':''}>AM</option><option ${h>=12?'selected':''}>PM</option></select></span>`},
+rt=id=>{const h=$('#'+id+'h').value;if(!h)return'';return String(+h%12+($('#'+id+'p').value=='PM'?12:0)).padStart(2,'0')+':'+String($('#'+id+'m').value).padStart(2,'0')},
+ad=(s,n)=>{const d=new Date(s+'T12:00');d.setDate(d.getDate()+n);return d.toLocaleDateString('en-CA')},fd=(s,o)=>new Date(s+'T12:00').toLocaleDateString('en-US',o),mon0=s=>ad(s,-((new Date(s+'T12:00').getDay()+6)%7)),
+ds=(y,m,d)=>`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`,
+arSel=(id,v)=>`<select class="in" id="${id}">${Object.entries(AR).map(([a,b])=>`<option value="${a}" ${a==v?'selected':''}>${esc(b)}</option>`).join('')}</select>`,
+tds=d=>S.td.filter(x=>x.d==d).sort((a,b)=>(a.t||'99').localeCompare(b.t||'99')),
+tdr=x=>`<div class="r"><button class="ck ${x.x?'on':''}" data-a="tdk" data-v="${x.id}"></button><span class="gr ${x.x?'dn':''}">${esc(x.n)}</span><span class="mu">${f12(x.t)}</span><button class="x" data-a="tdx" data-v="${x.id}">×</button></div>`,
+tdf=d=>`<div class="add"><input class="in" id="tn" placeholder="Add a to-do"><input class="in" id="tdd" type="date" value="${d}" style="flex:none">${tp('tt')}<button class="btn" data-a="tda">Add</button></div>`,
+hrow=(x,d,L)=>{if(eh==x.id)return`<div class="r" style="flex-wrap:wrap"><input class="in gr" id="en" value="${esc(x.n)}">${arSel('ea',x.a)}${tp('et',x.t)}<button class="btn" data-a="ehs" data-v="${x.id}">Save</button><button class="x" data-a="ehc">Cancel</button></div>`;const o=L.h.includes(x.id);return`<div class="r"><button class="ck ${o?'on':''}" data-a="hb" data-v="${x.id}|${d}"></button><span class="gr ${o?'dn':''}">${esc(x.n)}</span><span class="mu">${[f12(x.t),AR[x.a]].filter(Boolean).join(' · ')}</span><button class="x" data-a="ehe" data-v="${x.id}" title="Edit">✎</button><button class="x" data-a="delh" data-v="${x.id}" title="Remove">×</button></div>`},
+lst=k=>{const t={inc:'Income sources',exp:'Spending categories',ar:'Focus areas'}[k],it=k=='ar'?Object.entries(AR):S[k].map(x=>[x,x]);return`<div class="c"><h3>${t} <span class="mu">add or remove</span></h3><div class="pls">${it.map(([a,b])=>`<span class="pl" style="cursor:default">${esc(b)}<button class="x" data-a="ldel" data-v="${k}|${esc(a)}">×</button></span>`).join('')}</div><div class="add" style="margin:0"><input class="in" id="l_${k}" placeholder="Add new"><button class="btn" data-a="ladd" data-v="${k}">Add</button></div></div>`},
+WKf=()=>{const M=S.pu,r=f=>Math.max(3,Math.round(M*f)),wk=['Brisk walk','30–40 min'],mb=['Hip + thoracic mobility','10 min'];return{
+1:['Push',[['Push-ups',`4×${r(.8)}`],['Incline push-ups, hands on a bench',`3×${M+4}`],['Pike push-ups',`3×${r(.5)}`],['Close-grip push-ups',`2×${r(.5)}`],['Plank','3×30 s']]],
+2:['Pull + core',[['Towel or table rows',`4×${r(.9)}`],['Superman hold','3×20 s'],['Dead bug','3×10'],['Band or bag biceps curl','3×12'],['Plank','3×40 s']]],
+3:['Legs',[['Squat','4×15'],['Reverse lunge','3×10 each'],['Glute bridge','3×15'],['Calf raise','4×15'],['Wall sit','3×30 s']]],
+4:['Walk + mobility',[wk,mb,['Wall angels + chin tucks','2×10']]],
+5:['Upper power',[['Slow push-ups, 3 s down',`4×${r(.6)}`],['Decline push-ups, feet up',`3×${r(.6)}`],['Near-max push-ups',`1×${M-1}`],['Chin-up negatives','3×3'],['Shoulder taps','3×10 each']]],
+6:['Lower + cardio',[['Goblet squat','3×12'],['Hip thrust','4×12'],['Step-ups','3×10 each'],['Zone 2 cardio','25 min']]],
+0:['Rest + review',[['Easy walk','30 min'],['Progress photos','weekly'],['Meal prep','45 min']]]}},
+pcard=()=>`<div class="c"><h3>Push-up baseline <span class="mu">max in one set</span></h3><div class="big"><div><div class="bn">${S.pu}</div><span class="mu">current max</span></div><div><div class="bn">${S.pu+2}</div><span class="mu">next goal</span></div></div>${spark(S.pl.map(x=>x.n))}<div class="add"><input class="in" id="pm" type="number" min="1" placeholder="New max reps"><button class="btn" data-a="addp">Log max</button></div><p class="mu" style="margin-top:10px">Work sets run near 80% of your max, so 9 becomes sets of 7. Retest every two weeks.</p></div>`,
+vG=()=>`<div class="g"><div class="c"><h3>Goals <span class="mu">${S.gl.length}</span></h3>${S.gl.map(g=>`<div style="padding:9px 0"><div style="display:flex;justify-content:space-between;gap:8px"><b style="font-weight:500">${esc(g.n)}</b><span class="mu">${g.d?fd(g.d,{month:'short',day:'numeric',year:'numeric'})+' · ':''}${g.p}% <button class="x" data-a="gdel" data-v="${g.id}">×</button></span></div><input type="range" min="0" max="100" step="5" value="${g.p}" data-gp="${g.id}"></div>`).join('')||'<p class="mu">Set a goal with a date and track it here.</p>'}<div class="add"><input class="in" id="gn" placeholder="New goal"><input class="in" id="gd" type="date" style="flex:none"><button class="btn" data-a="gadd">Add</button></div></div></div>`;
+function vPl(){const t=T(),a=new Date(pd+'T12:00'),y=a.getFullYear(),mo=a.getMonth();let b,lb;
+if(pv=='d'){lb=fd(pd,{weekday:'long',month:'long',day:'numeric',year:'numeric'});const L=S.log[pd]||{h:[],m:0},x=tds(pd);b=`<div class="g"><div class="c"><h3>To-do <span class="mu">${x.filter(i=>i.x).length} of ${x.length}</span></h3>${x.map(tdr).join('')||'<p class="mu">Nothing planned.</p>'}${tdf(pd)}</div><div class="c"><h3>Habits <span class="mu">${Math.round(sc(pd)*100)}%</span></h3>${S.hb.map(h=>hrow(h,pd,L)).join('')}</div></div>`}
+else if(pv=='w'){const s0=mon0(pd);lb=fd(s0,{month:'short',day:'numeric'})+' – '+fd(ad(s0,6),{month:'short',day:'numeric'});b=`<div class="g">${[...Array(7)].map((_,i)=>{const d=ad(s0,i),x=tds(d);return`<div class="c"><h3><button class="nv" data-a="go" data-v="${d}" style="padding:0;color:var(--ink);font-weight:600">${fd(d,{weekday:'long',month:'short',day:'numeric'})}</button>${d==t?' <span class="mu">today</span>':''}</h3>${bar(sc(d))}${x.map(tdr).join('')||'<p class="mu">Nothing planned.</p>'}</div>`}).join('')}</div>`}
+else if(pv=='m'){lb=fd(pd,{month:'long',year:'numeric'});const dim=new Date(y,mo+1,0).getDate(),off=(new Date(y,mo,1).getDay()+6)%7;b=`<div class="c"><div class="cal">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(q=>`<span class="mu">${q}</span>`).join('')}${'<i></i>'.repeat(off)}${[...Array(dim)].map((_,i)=>{const d=ds(y,mo,i+1),n=tds(d).length;return`<button class="cd ${d==t?'today':''}" data-a="go" data-v="${d}"><b>${i+1}</b> <span class="mu">${n||''}</span><i style="opacity:${(.1+.9*sc(d)).toFixed(2)}"></i></button>`}).join('')}</div><p class="mu" style="margin-top:12px">Numbers are to-dos. The bar is your habit score.</p></div>`}
+else{lb=''+y;b=`<div class="g">${[...Array(12)].map((_,m)=>{const dim=new Date(y,m+1,0).getDate(),off=(new Date(y,m,1).getDay()+6)%7;let c='<i style="opacity:0"></i>'.repeat(off),n=0;for(let i=1;i<=dim;i++){const d=ds(y,m,i);n+=tds(d).length;c+=`<i title="${d}" style="opacity:${(.07+.93*sc(d)).toFixed(2)}"></i>`}return`<div class="c"><h3><button class="nv" data-a="gm" data-v="${ds(y,m,1)}" style="padding:0;color:var(--ink);font-weight:600">${fd(ds(y,m,1),{month:'long'})}</button> <span class="mu">${n} to-dos</span></h3><div class="hm mm">${c}</div></div>`}).join('')}</div>`}
+return hd('Day, week, month, year','Plan')+`<div class="pls">${[['d','Day'],['w','Week'],['m','Month'],['y','Year']].map(([k,n])=>`<button class="pl ${pv==k?'on':''}" data-a="pv" data-v="${k}">${n}</button>`).join('')}</div><div class="pls" style="align-items:center"><button class="ib" data-a="pn" data-v="-1">‹</button><b style="min-width:170px;text-align:center;font-weight:500">${lb}</b><button class="ib" data-a="pn" data-v="1">›</button><button class="pl" data-a="pt">Today</button></div>`+b}
+Object.assign(A,{
+pv:v=>{pv=v;draw()},pt:()=>{pd=T();draw()},go:d=>{pd=d;pv='d';draw()},gm:d=>{pd=d;pv='m';draw()},
+pn:v=>{const d=new Date(pd+'T12:00'),n=+v;if(pv=='d')d.setDate(d.getDate()+n);else if(pv=='w')d.setDate(d.getDate()+7*n);else if(pv=='m')d.setMonth(d.getMonth()+n,1);else d.setFullYear(d.getFullYear()+n,0,1);pd=d.toLocaleDateString('en-CA');draw()},
+tda:()=>{const n=$('#tn').value.trim();if(n){S.td.push({id:'t'+Date.now(),d:$('#tdd').value||T(),t:rt('tt'),n,x:0});sv();draw()}},
+tdk:id=>{const x=S.td.find(y=>y.id==id);x.x=x.x?0:1;sv();draw()},tdx:id=>{S.td=S.td.filter(x=>x.id!=id);sv();draw()},
+addh:()=>{const n=$('#nh').value.trim();if(n){S.hb.push({id:'h'+Date.now(),n,a:$('#na').value,t:rt('nt')});sv();draw()}},
+ehe:id=>{eh=id;draw()},ehc:()=>{eh=null;draw()},ehs:id=>{const h=S.hb.find(x=>x.id==id),n=$('#en').value.trim();if(n){h.n=n;h.a=$('#ea').value;h.t=rt('et')}eh=null;sv();draw()},
+sadd:()=>{const n=$('#sn').value.trim(),t=rt('st');if(n&&t){S.sch.push([t,n]);sv();draw()}},sdel:i=>{S.sch.splice(+i,1);sv();draw()},
+ladd:k=>{const v=$('#l_'+k).value.trim();if(!v)return;if(k=='ar')S.ar['a'+Date.now()]=v;else if(!S[k].includes(v))S[k].push(v);sv();draw()},
+ldel:v=>{const[k,a]=v.split('|');if(k=='ar'){if(Object.keys(AR).length<2)return;delete S.ar[a];const f=Object.keys(S.ar)[0];S.hb.forEach(h=>{if(h.a==a)h.a=f})}else S[k]=S[k].filter(x=>x!=a);sv();draw()},
+addp:()=>{const n=+$('#pm').value;if(n>0){S.pl.push({d:T(),n});S.pu=n;sv();draw()}},
+gadd:()=>{const n=$('#gn').value.trim();if(n){S.gl.push({id:'g'+Date.now(),n,d:$('#gd').value,p:0});sv();draw()}},gdel:id=>{S.gl=S.gl.filter(g=>g.id!=id);sv();draw()}});
+document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(d.gp){S.gl.find(g=>g.id==d.gp).p=+t.value;sv();draw()}else if(d.jn!=null){lg(T()).j=t.value;sv()}});
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(t&&A[t.dataset.a])A[t.dataset.a](t.dataset.v)});
+document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(d.sk!=null){S.sk[d.sk]=+t.value;sv();draw()}else if(d.rv){const k=D((new Date().getDay()+6)%7);(S.rv[k]??={})[d.rv]=t.value;sv()}else if(t.id=='fu'){S.fund=+t.value||0;sv();draw()}});
+let ld=T();
+const WKL={3:['Exfoliate tonight (BHA or AHA)'],0:['Exfoliate tonight (BHA or AHA)','Fresh pillowcase','Progress photos'],6:['Tidy brows, nails, neckline']},
+SPEC=d=>{const w=new Date(d+'T12:00').getDay();return[['wo','Workout: '+WKf()[w][0]],...(WKL[w]||[]).map((t,i)=>['wl'+i,t])]},
+tn=(x,w)=>x.startsWith('Workout or walk')?'Workout: '+WKf()[w][0]:x.includes('PM skincare')&&WKL[w]?.[0].startsWith('Exfol')?x+' + exfoliate':x,
+spc=d=>{const w=new Date(d+'T12:00').getDay(),k=SPEC(d);return k.map(([id,t],i)=>{const o=S.c['s'+d+'_'+id];return`<div class="r"><button class="ck ${o?'on':''}" data-a="chk" data-v="s${d}_${id}"></button><span class="gr ${o?'dn':''}">${esc(t)}</span><span class="mu">${i?'Looks':'Body'}</span></div>`}).join('')+`<p class="mu" style="margin:6px 0 10px">${WKf()[w][1].map(e=>e[0]+' '+e[1]).join(' · ')}</p>`},
+AD=(d,a)=>{const L=S.log[d]?.h||[],o=S.hb.filter(x=>x.a==a&&L.includes(x.id)).map(x=>x.n);if(a=='body'&&S.c['s'+d+'_wo'])o.push(SPEC(d)[0][1]);if(a=='looks')SPEC(d).slice(1).forEach(([id,t])=>{if(S.c['s'+d+'_'+id])o.push(t)});return o};
+function vLg(){const e=S.dl[ld]||{},K=Object.keys(AR);
+return hd('What you did, how it went','Daily log')+`<div class="pls" style="align-items:center"><button class="ib" data-a="ln" data-v="-1">‹</button><input class="in" type="date" value="${ld}" data-ld="1"><button class="ib" data-a="ln" data-v="1">›</button><button class="pl" data-a="lt">Today</button></div><p class="mu" style="margin-bottom:14px">Tasks you tick on Today fill in automatically. Rate the day 1–5 and add a note for each area.</p><div class="g">${K.map(a=>{const it=AD(ld,a),r=(e[a]||{}).r||0;return`<div class="c"><h3>${esc(AR[a])} <span class="mu">${it.length} done</span></h3>${it.map(x=>`<div class="r"><span class="gr">${esc(x)}</span></div>`).join('')||'<p class="mu">No tasks completed.</p>'}<div class="pls" style="margin:10px 0 0">${[1,2,3,4,5].map(i=>`<button class="pl ${r==i?'on':''}" data-a="rate" data-v="${a}|${i}">${i}</button>`).join('')}</div><textarea class="in" data-dn="${a}" placeholder="What did you practice or notice?">${esc((e[a]||{}).n||'')}</textarea></div>`}).join('')}</div><div class="c"><h3>Last 7 days <span class="mu">ratings</span></h3>${[...Array(7)].map((_,i)=>{const d=D(i);return`<div class="r sx"><button class="nv" style="padding:0" data-a="lgo" data-v="${d}">${fd(d,{weekday:'short',month:'short',day:'numeric'})}</button><b class="mu">${K.map(a=>AR[a].slice(0,4)+' '+(S.dl[d]?.[a]?.r||'–')).join(' · ')}</b></div>`}).join('')}</div>`}
+Object.assign(A,{cloud:()=>window.cloudToggle?cloudToggle():alert('Sync could not load. Check your connection, and open the site from its https link.'),ln:v=>{ld=ad(ld,+v);draw()},lt:()=>{ld=T();draw()},lgo:d=>{ld=d;draw()},rate:v=>{const[a,i]=v.split('|'),o=((S.dl[ld]??={})[a]??={});o.r=o.r==+i?0:+i;sv();draw()}});
+document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(d.dn){((S.dl[ld]??={})[d.dn]??={}).n=t.value;sv()}else if(d.ld){ld=t.value||T();draw()}else if(d.imf){const r=new FileReader();r.onload=()=>{try{S=Object.assign(S,JSON.parse(r.result));ini();sv();draw()}catch(x){}};r.readAsText(t.files[0])}});
+sv();draw();boot=0;
+</script><script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import{initializeFirestore,persistentLocalCache,doc,setDoc,onSnapshot}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+const app=initializeApp({apiKey:"AIzaSyA5AQNbycKOIg50jsEKxaAtSsfOh61DV-Y",authDomain:"year-one-planner-kurt-luis.firebaseapp.com",projectId:"year-one-planner-kurt-luis",storageBucket:"year-one-planner-kurt-luis.firebasestorage.app",messagingSenderId:"1041368518797",appId:"1:1041368518797:web:0cefd04b93d9d57f6c92c4"}),
+auth=getAuth(app),db=initializeFirestore(app,{localCache:persistentLocalCache()});
+let ref=null,off=null,tm=null;
+const mark=v=>{window.CS=v;draw()};
+window.cp=()=>{if(!ref)return;clearTimeout(tm);tm=setTimeout(()=>setDoc(ref,{d:JSON.stringify(S),u:S._u||0}).catch(()=>{}),700)};
+window.cloudToggle=async()=>{if(auth.currentUser){if(confirm('Sign out of sync? Your data stays on this device and in the cloud.'))signOut(auth);return}
+const p=new GoogleAuthProvider();try{await signInWithPopup(auth,p)}catch(e){if(e.code!='auth/popup-closed-by-user')try{await signInWithRedirect(auth,p)}catch(x){alert('Sign-in failed: '+x.code)}}};
+onAuthStateChanged(auth,u=>{off&&off();off=null;ref=null;if(!u){mark(0);return}
+ref=doc(db,'users',u.uid);mark(1);
+off=onSnapshot(ref,s=>{if(s.metadata.hasPendingWrites||s.metadata.fromCache)return;const r=s.data();
+if(!r){cp();return}
+if(r.u>(S._u||0)){try{const o=JSON.parse(r.d);Object.keys(S).forEach(k=>delete S[k]);Object.assign(S,o);ini();localStorage.setItem(K,JSON.stringify(S));const a=document.activeElement;if(!a||!/INPUT|TEXTAREA|SELECT/.test(a.tagName))draw()}catch(e){}}
+else if((S._u||0)>r.u)cp()})});
+</script></body></html>

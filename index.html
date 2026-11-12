@@ -76,12 +76,12 @@ const TIP={body:'Lay out gym clothes the night before. The 1:30 PM session is ea
 let S={},V='t',wdv=null;try{S=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
 const HT={sl:'19:30',am:'03:00',pm:'19:00',jn:'19:00',wk:'13:30',lg:'15:00',st:'15:00',bd:'16:15',kb:'06:45'},ini=()=>{S.start??=T();S.hb??=HB0.map(([id,n,a])=>({id,n,a,t:HT[id]||''}));S.log??={};S.w??=[];S.tx??=[];S.sk??={};S.c??={};S.rv??={};S.fund??=60000;S.td??=[];S.gl??=[];S.pu??=9;S.pl??=[{d:T(),n:S.pu}];S.sch??=SCH.map(x=>[...x]);S.inc??=INC0.slice();S.exp??=EXP0.slice();S.ar??={...AR0};S.dl??={};S.ht??=0;AR=S.ar};ini();
 if(S.th)document.documentElement.dataset.theme=S.th;
-let boot=1;const sv=()=>{if(!boot)S._u=Date.now();try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}window.cp&&cp()},lg=d=>S.log[d]||(S.log[d]={h:[],m:0});
+let boot=1;const sv=()=>{if(!boot){S._u=Math.max(Date.now(),(S._u||0)+1);try{localStorage.setItem(K+'-d','1')}catch(e){}}try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}window.cp&&cp()},lg=d=>S.log[d]||(S.log[d]={h:[],m:0});
 const sc=d=>{const h=S.log[d]?.h||[];return S.hb.length?S.hb.filter(x=>h.includes(x.id)).length/S.hb.length:0};
 const ar=a=>{const hs=S.hb.filter(x=>x.a==a);if(!hs.length)return null;let n=0;for(let i=0;i<7;i++){const h=S.log[D(i)]?.h||[];n+=hs.filter(x=>h.includes(x.id)).length}return n/(hs.length*7)};
 const streak=()=>{let n=0;for(let i=sc(T())>=.6?0:1;i<400&&sc(D(i))>=.6;i++)n++;return n};
 const mon=()=>Math.max(0,Math.min(11,Math.floor((Date.now()-new Date(S.start+'T00:00'))/2.6298e9)));
-const hd=(a,b)=>`<header class="hd"><div><p class="mu">${a}</p><h1>${b}</h1></div><span style="display:flex;gap:8px"><button class="ib" data-a="cloud" title="Sync across devices" style="${window.CS?'background:var(--ink);color:var(--oi)':''}">☁</button><button class="ib" data-a="th" title="Switch light or dark">◐</button></span></header>`;
+const hd=(a,b)=>`<header class="hd"><div><p class="mu">${a}</p><h1>${b}</h1></div><span style="display:flex;gap:8px"><button class="ib" data-a="cloud" title="${window.CS==2?'Sync error: '+String(window.CE||'').replace(/[^\w .:\/-]/g,''):'Sync across devices'}" style="${window.CS==2?'background:#c0392b;color:#fff':window.CS?'background:var(--ink);color:var(--oi)':''}">☁</button><button class="ib" data-a="th" title="Switch light or dark">◐</button></span></header>`;
 const ring=p=>`<svg viewBox="0 0 120 120" class="ring"><circle class="rb" cx="60" cy="60" r="52"/><circle class="rf" cx="60" cy="60" r="52" stroke-dasharray="${(327*p).toFixed(1)} 327" transform="rotate(-90 60 60)"/><text class="rn" x="60" y="71">${Math.round(p*100)}</text></svg>`;
 const cl=(pre,arr)=>arr.map((t,i)=>{const o=S.c[pre+i];return`<div class="r"><button class="ck ${o?'on':''}" data-a="chk" data-v="${pre+i}"></button><span class="gr ${o?'dn':''}">${t}</span></div>`}).join('');
 const bar=p=>`<div class="bar"><i style="width:${Math.min(100,Math.round(p*100))}%"></i></div>`;
@@ -198,18 +198,23 @@ sv();draw();boot=0;
 </script><script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import{getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import{initializeFirestore,persistentLocalCache,doc,setDoc,onSnapshot}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import{initializeFirestore,persistentLocalCache,persistentMultipleTabManager,doc,setDoc,onSnapshot}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 const app=initializeApp({apiKey:"AIzaSyA5AQNbycKOIg5OjsEKxaAtSsfOh61DV-Y",authDomain:"year-one-planner-kurt-luis.firebaseapp.com",projectId:"year-one-planner-kurt-luis",storageBucket:"year-one-planner-kurt-luis.firebasestorage.app",messagingSenderId:"1041368518797",appId:"1:1041368518797:web:0cefd04b93d9d57f6c92c4"}),
-auth=getAuth(app),db=initializeFirestore(app,{localCache:persistentLocalCache()});
+auth=getAuth(app),db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})});
 let ref=null,off=null,tm=null;
-const mark=v=>{window.CS=v;draw()};
-window.cp=()=>{if(!ref)return;clearTimeout(tm);tm=setTimeout(()=>setDoc(ref,{d:JSON.stringify(S),u:S._u||0}).catch(()=>{}),700)};
+const DK=K+'-d',isD=()=>{try{return localStorage.getItem(DK)=='1'}catch(e){return false}},setD=v=>{try{v?localStorage.setItem(DK,'1'):localStorage.removeItem(DK)}catch(e){}};
+const mark=(v,e)=>{window.CS=v;window.CE=e||'';draw()};
+const fail=e=>{console.error('Sync error',e);mark(2,e&&(e.code||e.message))};
+const push=()=>{if(!ref)return;const u=S._u||0;setDoc(ref,{d:JSON.stringify(S),u}).then(()=>{if((S._u||0)==u)setD(false);if(window.CS==2)mark(1)}).catch(fail)};
+window.cp=()=>{if(!ref)return;clearTimeout(tm);tm=setTimeout(push,700)};
 window.cloudToggle=async()=>{if(auth.currentUser){if(confirm('Sign out of sync? Your data stays on this device and in the cloud.'))signOut(auth);return}
 const p=new GoogleAuthProvider();try{await signInWithPopup(auth,p)}catch(e){if(e.code!='auth/popup-closed-by-user')try{await signInWithRedirect(auth,p)}catch(x){alert('Sign-in failed: '+x.code)}}};
 onAuthStateChanged(auth,u=>{off&&off();off=null;ref=null;if(!u){mark(0);return}
 ref=doc(db,'users',u.uid);mark(1);
 off=onSnapshot(ref,s=>{if(s.metadata.hasPendingWrites||s.metadata.fromCache)return;const r=s.data();
-if(!r){cp();return}
-if(r.u>(S._u||0)){try{const o=JSON.parse(r.d);Object.keys(S).forEach(k=>delete S[k]);Object.assign(S,o);ini();localStorage.setItem(K,JSON.stringify(S));const a=document.activeElement;if(!a||!/INPUT|TEXTAREA|SELECT/.test(a.tagName))draw()}catch(e){}}
-else if((S._u||0)>r.u)cp()})});
+if(!r){push();return}
+const l=S._u||0;
+if(r.u===l){setD(false);return}
+if(r.u>l||!isD()){try{const o=JSON.parse(r.d);Object.keys(S).forEach(k=>delete S[k]);Object.assign(S,o);ini();localStorage.setItem(K,JSON.stringify(S));setD(false);const a=document.activeElement;if(!a||!/INPUT|TEXTAREA|SELECT/.test(a.tagName))draw()}catch(e){console.error(e)}}
+else push()},fail)});
 </script></body></html>

@@ -200,18 +200,21 @@ import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-ap
 import{getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import{initializeFirestore,persistentLocalCache,persistentMultipleTabManager,doc,setDoc,onSnapshot}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 const app=initializeApp({apiKey:"AIzaSyA5AQNbycKOIg5OjsEKxaAtSsfOh61DV-Y",authDomain:"year-one-planner-kurt-luis.firebaseapp.com",projectId:"year-one-planner-kurt-luis",storageBucket:"year-one-planner-kurt-luis.firebasestorage.app",messagingSenderId:"1041368518797",appId:"1:1041368518797:web:0cefd04b93d9d57f6c92c4"}),
-auth=getAuth(app),db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})});
+auth=getAuth(app),db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()}),experimentalAutoDetectLongPolling:true});
 let ref=null,off=null,tm=null;
 const DK=K+'-d',isD=()=>{try{return localStorage.getItem(DK)=='1'}catch(e){return false}},setD=v=>{try{v?localStorage.setItem(DK,'1'):localStorage.removeItem(DK)}catch(e){}};
+const st=document.createElement('div');st.style.cssText='position:fixed;left:8px;bottom:8px;z-index:99;font:11px/1.3 system-ui,sans-serif;padding:4px 8px;border-radius:8px;background:rgba(0,0,0,.75);color:#fff;max-width:90vw;pointer-events:none';document.body.appendChild(st);
+const say=t=>{st.textContent=t},hm=()=>new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+let wt=null;
 const mark=(v,e)=>{window.CS=v;window.CE=e||'';draw()};
-const fail=e=>{console.error('Sync error',e);mark(2,e&&(e.code||e.message))};
-const push=()=>{if(!ref)return;const u=S._u||0;setDoc(ref,{d:JSON.stringify(S),u}).then(()=>{if((S._u||0)==u)setD(false);if(window.CS==2)mark(1)}).catch(fail)};
+const fail=e=>{console.error('Sync error',e);say('Sync error: '+(e&&(e.code||e.message)));mark(2,e&&(e.code||e.message))};
+const push=()=>{if(!ref)return;const u=S._u||0;say('Saving…');const w=setTimeout(()=>say('Save not confirmed: cannot reach Firestore (blocked or offline?)'),8000);setDoc(ref,{d:JSON.stringify(S),u}).then(()=>{clearTimeout(w);if((S._u||0)==u)setD(false);say('Saved '+hm());if(window.CS==2)mark(1)}).catch(e=>{clearTimeout(w);fail(e)})};
 window.cp=()=>{if(!ref)return;clearTimeout(tm);tm=setTimeout(push,700)};
 window.cloudToggle=async()=>{if(auth.currentUser){if(confirm('Sign out of sync? Your data stays on this device and in the cloud.'))signOut(auth);return}
 const p=new GoogleAuthProvider();try{await signInWithPopup(auth,p)}catch(e){if(e.code!='auth/popup-closed-by-user')try{await signInWithRedirect(auth,p)}catch(x){alert('Sign-in failed: '+x.code)}}};
-onAuthStateChanged(auth,u=>{off&&off();off=null;ref=null;if(!u){mark(0);return}
+onAuthStateChanged(auth,u=>{off&&off();off=null;ref=null;clearTimeout(wt);if(!u){say('Signed out');mark(0);return}say('Signed in as '+(u.email||u.uid)+' · connecting…');wt=setTimeout(()=>say('Signed in as '+(u.email||u.uid)+' · cannot reach Firestore (blocked or offline?)'),10000);
 ref=doc(db,'users',u.uid);mark(1);
-off=onSnapshot(ref,s=>{if(s.metadata.hasPendingWrites||s.metadata.fromCache)return;const r=s.data();
+off=onSnapshot(ref,s=>{if(s.metadata.hasPendingWrites||s.metadata.fromCache)return;clearTimeout(wt);say('Connected '+hm());const r=s.data();
 if(!r){push();return}
 const l=S._u||0;
 if(r.u===l){setD(false);return}

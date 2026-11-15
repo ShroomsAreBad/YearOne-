@@ -352,7 +352,7 @@ function nw(){const d=new Date();return String(d.getHours()).padStart(2,'0')+':'
 sv();draw();boot=0;
 </script><script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import{getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,getRedirectResult,signOut}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import{initializeFirestore,persistentLocalCache,persistentMultipleTabManager,doc,setDoc,onSnapshot,disableNetwork,enableNetwork}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 const app=initializeApp({apiKey:"AIzaSyA5AQNbycKOIg5OjsEKxaAtSsfOh61DV-Y",authDomain:"year-one-planner-kurt-luis.firebaseapp.com",projectId:"year-one-planner-kurt-luis",storageBucket:"year-one-planner-kurt-luis.firebasestorage.app",messagingSenderId:"1041368518797",appId:"1:1041368518797:web:0cefd04b93d9d57f6c92c4"}),
 auth=getAuth(app),db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()}),experimentalAutoDetectLongPolling:true});
@@ -373,7 +373,7 @@ if(r.u>l||!isD()){try{const o=JSON.parse(r.d);Object.keys(S).forEach(k=>delete S
 const sub=()=>{off&&off();off=null;clearTimeout(wt);const u=auth.currentUser;if(!u)return;ref=doc(db,'users',u.uid);mark(3);say('Connecting…','warn');wt=setTimeout(()=>bad('timeout'),15000);
 off=onSnapshot(ref,{includeMetadataChanges:true},s=>{if(s.metadata.fromCache)return;good();if(s.metadata.hasPendingWrites)return;merge(s.data())},e=>bad(e.code||e.message))};
 const retry=async()=>{if(!auth.currentUser)return;mark(3);say('Retrying…','warn');try{await disableNetwork(db);await enableNetwork(db)}catch(e){}sub()};
-const signin=async()=>{const p=new GoogleAuthProvider();try{await signInWithPopup(auth,p);cd.close()}catch(e){if(e.code!='auth/popup-closed-by-user')try{await signInWithRedirect(auth,p)}catch(x){say('Sign-in failed: '+x.code,'err')}}};
+const signin=async()=>{const p=new GoogleAuthProvider();try{await signInWithPopup(auth,p);cd.close()}catch(e){const c=e&&e.code||String(e);if(c=='auth/popup-closed-by-user'||c=='auth/cancelled-popup-request')return;if(c=='auth/popup-blocked'||c=='auth/operation-not-supported-in-this-environment')try{await signInWithRedirect(auth,p)}catch(x){say('Sign-in failed: '+(x.code||x),'err')}else{say('Sign-in failed: '+c,'err');console.error('signin',e)}}};
 tb_.onclick=retry;
 cd.addEventListener('click',e=>{const c=e.target.dataset&&e.target.dataset.c;if(e.target==cd||c=='x')cd.close();else if(c=='retry'){retry();cd.close()}else if(c=='out'){signOut(auth);cd.close()}else if(c=='in')signin()});
 window.cp=()=>{if(!ref)return;if(window.CS==2||window.CS==4)say('Saved on this device. Not synced yet.','err',1);clearTimeout(tm);tm=setTimeout(push,700)};
@@ -385,5 +385,6 @@ window.aiGen=async(p,sys)=>{if(!auth.currentUser)throw new Error('signin');if(!a
 if(ACK.key||loc){const c=await import(g+'firebase-app-check.js');c.initializeAppCheck(ap,{provider:ACK.type=='v3'?new c.ReCaptchaV3Provider(ACK.key||'debug'):new c.ReCaptchaEnterpriseProvider(ACK.key||'debug'),isTokenAutoRefreshEnabled:true})}
 aiM={i,ai:i.getAI(ap,{backend:new i.GoogleAIBackend(),useLimitedUseAppCheckTokens:!!(ACK.key||loc)})};break}catch(e){err=e}}if(!aiM)throw err}
 let last;for(const m of['gemini-3.8-flash','gemini-3.5-flash-lite']){try{const r=await aiM.i.getGenerativeModel(aiM.ai,{model:m,systemInstruction:sys,generationConfig:{responseMimeType:'application/json',temperature:.3}}).generateContent(p);return r.response.text()}catch(e){last=e;if(/quota|429|resource/i.test(String(e&&e.message)))break}}throw last};
+getRedirectResult(auth).catch(e=>{say('Sign-in failed: '+(e.code||e),'err');console.error('redirect',e)});
 onAuthStateChanged(auth,u=>{window.AU=u?(u.email||'account'):'';document.getElementById('ai').open&&aiR();{const a=document.activeElement;if(!a||!/INPUT|TEXTAREA|SELECT/.test(a.tagName))draw()}off&&off();off=null;ref=null;clearTimeout(wt);clearTimeout(rtm);if(!u){mark(0);return}sub()});
 </script></body></html>

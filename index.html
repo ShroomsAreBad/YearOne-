@@ -380,7 +380,7 @@ window.cp=()=>{if(!ref)return;if(window.CS==2||window.CS==4)say('Saved on this d
 window.cloudToggle=()=>{panel();cd.showModal()};
 addEventListener('online',()=>auth.currentUser&&retry());addEventListener('offline',()=>auth.currentUser&&bad(''));
 /* App Check: paste your reCAPTCHA site key in key. type is 'enterprise' or 'v3'. Leave key empty to run without it. */
-let aiM=null;const ACK={key:'6LekgSEuAAAAAHZcCBU34Vi-fHoXk8d0hGlMZQCz',type:'enterprise'};
+let aiM=null;const ACK={key:'',type:'enterprise'}; /* TEMP: App Check off for AI. To turn back on, put the reCAPTCHA Enterprise site key between the quotes after key: */
 window.aiGen=async(p,sys)=>{if(!auth.currentUser)throw new Error('signin');if(!aiM){let err;for(const v of['12.14.0','12.0.0']){try{const g='https://www.gstatic.com/firebasejs/'+v+'/',[a,i]=await Promise.all([import(g+'firebase-app.js'),import(g+'firebase-ai.js')]),ap=a.initializeApp(app.options,'ai'),loc=/^(localhost|127\.0\.0\.1)$/.test(location.hostname);if(loc)self.FIREBASE_APPCHECK_DEBUG_TOKEN=true;
 if(ACK.key||loc){const c=await import(g+'firebase-app-check.js');c.initializeAppCheck(ap,{provider:ACK.type=='v3'?new c.ReCaptchaV3Provider(ACK.key||'debug'):new c.ReCaptchaEnterpriseProvider(ACK.key||'debug'),isTokenAutoRefreshEnabled:true})}
 aiM={i,ai:i.getAI(ap,{backend:new i.GoogleAIBackend(),useLimitedUseAppCheckTokens:!!(ACK.key||loc)})};break}catch(e){err=e}}if(!aiM)throw err}

@@ -355,7 +355,7 @@ import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-ap
 import{getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,getRedirectResult,signOut}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import{initializeFirestore,persistentLocalCache,persistentMultipleTabManager,doc,setDoc,onSnapshot,disableNetwork,enableNetwork}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 const app=initializeApp({apiKey:"AIzaSyA5AQNbycKOIg5OjsEKxaAtSsfOh61DV-Y",authDomain:"year-one-planner-kurt-luis.firebaseapp.com",projectId:"year-one-planner-kurt-luis",storageBucket:"year-one-planner-kurt-luis.firebasestorage.app",messagingSenderId:"1041368518797",appId:"1:1041368518797:web:0cefd04b93d9d57f6c92c4"}),
-auth=getAuth(app),db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()}),experimentalAutoDetectLongPolling:true});
+auth=getAuth(app),db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()}),experimentalForceLongPolling:true});
 let ref=null,off=null,tm=null;
 const DK=K+'-d',isD=()=>{try{return localStorage.getItem(DK)=='1'}catch(e){return false}},setD=v=>{try{v?localStorage.setItem(DK,'1'):localStorage.removeItem(DK)}catch(e){}};
 const $s=document.getElementById('st'),tm_=$s.firstElementChild,tb_=$s.lastElementChild,cd=document.getElementById('cd'),TXT={0:'Not signed in',1:'Connected',2:'Can’t reach the cloud',3:'Connecting…',4:'You’re offline'};
@@ -367,7 +367,7 @@ const panel=()=>{const u=auth.currentUser,v=window.CS||0;cd.innerHTML=`<div clas
 const mark=(v,e)=>{window.CS=v;window.CT=TXT[v]+(v==2&&e?' ('+String(e).replace(/[^\w .:\/-]/g,'')+')':'');document.querySelectorAll('.cb').forEach(b=>{b.className='ib cb s'+v;b.title=window.CT});if(cd.open)panel()};
 const good=m=>{clearTimeout(wt);clearTimeout(rtm);fails=0;const was=window.CS;mark(1);last=hm();if(m)say(m);else if(was!=1)say('Connected')},
 bad=e=>{clearTimeout(wt);const o=!navigator.onLine;mark(o?4:2,o?'':e);say(o?'You’re offline. Changes are saved on this device and will sync later.':'Not connected to the cloud. Changes are saved on this device.','err',1);clearTimeout(rtm);rtm=setTimeout(()=>navigator.onLine&&retry(),Math.min(60000,10000*2**Math.min(fails++,3)))};
-const push=()=>{if(!ref)return;const u=S._u||0;window.CS==1&&say('Saving…','warn');const w=setTimeout(()=>bad('save-timeout'),8000);setDoc(ref,{d:JSON.stringify(S),u}).then(()=>{clearTimeout(w);if((S._u||0)==u)setD(false);good('Saved '+hm())}).catch(e=>{clearTimeout(w);bad(e.code||e.message)})};
+const push=()=>{if(!ref)return;const u=S._u||0;window.CS==1&&say('Saving…','warn');const w=setTimeout(()=>bad('save-timeout'),20000);setDoc(ref,{d:JSON.stringify(S),u}).then(()=>{clearTimeout(w);if((S._u||0)==u)setD(false);good('Saved '+hm())}).catch(e=>{clearTimeout(w);bad(e.code||e.message)})};
 const merge=r=>{if(!r){push();return}const l=S._u||0;if(r.u===l){setD(false);return}
 if(r.u>l||!isD()){try{const o=JSON.parse(r.d);Object.keys(S).forEach(k=>delete S[k]);Object.assign(S,o);ini();localStorage.setItem(K,JSON.stringify(S));setD(false);const a=document.activeElement;if(!a||!/INPUT|TEXTAREA|SELECT/.test(a.tagName))draw()}catch(e){console.error(e)}}else push()};
 const sub=()=>{off&&off();off=null;clearTimeout(wt);const u=auth.currentUser;if(!u)return;ref=doc(db,'users',u.uid);mark(3);say('Connecting…','warn');wt=setTimeout(()=>bad('timeout'),15000);
